@@ -1,0 +1,19 @@
+{
+	"alliances": [
+		{
+			"name": "SGU",
+			"meat_rate": 140400,
+			"wood_rate": 129600,
+			"coal_rate": 64800,
+			"iron_rate": 61200
+		},
+		{
+			"name": "Alliance2",
+			"meat_rate": 150000,
+			"wood_rate": 130000,
+			"coal_rate": 65000,
+			"iron_rate": 60000
+		}
+	]
+}
+
