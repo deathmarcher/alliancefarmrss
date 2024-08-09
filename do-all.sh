@@ -18,5 +18,5 @@ pip3 install -r requirements.txt
 
 # Run the application
 echo "Running app.py..."
-python3 app.py $@
+python3 app.py -p 8813 $@
 

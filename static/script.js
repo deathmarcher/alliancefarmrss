@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		iron: 73200
 	};
 
-	function calculateFarms(rate, costPerBanner) {
+	function calculateMaxBannersPerDay(rate, costPerBanner) {
 		return Math.floor((rate * 24) / costPerBanner);
 	}
 
@@ -28,23 +28,25 @@ document.addEventListener('DOMContentLoaded', function() {
 		const coalRate = parseInt(coalRateInput.value) || 0;
 		const ironRate = parseInt(ironRateInput.value) || 0;
 
-		const meatFarms = calculateFarms(meatRate, bannerCosts.meat);
-		const woodFarms = calculateFarms(woodRate, bannerCosts.wood);
-		const coalFarms = calculateFarms(coalRate, bannerCosts.coal);
-		const ironFarms = calculateFarms(ironRate, bannerCosts.iron);
+		const meatFarms = calculateMaxBannersPerDay(meatRate, bannerCosts.meat);
+		const woodFarms = calculateMaxBannersPerDay(woodRate, bannerCosts.wood);
+		const coalFarms = calculateMaxBannersPerDay(coalRate, bannerCosts.coal);
+		const ironFarms = calculateMaxBannersPerDay(ironRate, bannerCosts.iron);
 
 		meatFarmsElement.textContent = meatFarms;
 		woodFarmsElement.textContent = woodFarms;
 		coalFarmsElement.textContent = coalFarms;
 		ironFarmsElement.textContent = ironFarms;
 
-		updateTable(meatFarms, woodFarms, coalFarms, ironFarms);
+		const maxBannersPerDay = Math.min(meatFarms, woodFarms, coalFarms, ironFarms);
+
+		updateTable(maxBannersPerDay, meatFarms, woodFarms, coalFarms, ironFarms);
 	}
 
-	function updateTable(meatFarms, woodFarms, coalFarms, ironFarms) {
+	function updateTable(maxBannersPerDay, meatFarms, woodFarms, coalFarms, ironFarms) {
 		bannersTableBody.innerHTML = '';
 
-		for (let banners = meatFarms; banners <= meatFarms + 7; banners++) {
+		for (let banners = maxBannersPerDay; banners <= maxBannersPerDay + 7; banners++) {
 			const extraMeatFarms = Math.max(0, Math.ceil(((banners * bannerCosts.meat) / (24 * 3600)) - meatFarms));
 			const extraWoodFarms = Math.max(0, Math.ceil(((banners * bannerCosts.wood) / (24 * 3600)) - woodFarms));
 			const extraCoalFarms = Math.max(0, Math.ceil(((banners * bannerCosts.coal) / (24 * 3600)) - coalFarms));
