@@ -16,7 +16,6 @@ source $VENV_DIR/bin/activate
 echo "Installing requirements..."
 pip3 install -r requirements.txt
 
-# Run the application
+# Run the application with specified port
 echo "Running app.py..."
-python3 app.py -p 8813 $@
-
+python3 app.py  -p 8813 $@
